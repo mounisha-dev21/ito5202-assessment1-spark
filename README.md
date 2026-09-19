@@ -24,7 +24,7 @@ This project involves designing and implementing an analytical query of a large 
 
 The dataset comprises of 9 inter-related .csv files, which is total contain approximately 1.55 million records. 
 
-Note: the dataset files are not committed to this repository due to their size.
+Note: the dataset files are not committed to this repository due to their size. See `data/README.md` for further information and for dataset download instructions.
 
 ---
 
