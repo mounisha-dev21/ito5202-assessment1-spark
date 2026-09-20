@@ -60,6 +60,38 @@ pip install -r requirements.txt
 |---|---|
 | `README.md` | Project overview and setup instructions |
 | `requirements.txt` | Pinned Python dependencies |
-| `proposal/proposal.md` | Approved dataset proposal (hurdle requirement) |
+| `assessment1.ipynb` | Main notebook containing all code and analysis |
+| `proposal/proposal.md` | Approved dataset proposal |
+| `data/README.md` | Dataset download instructions (data files excluded from repository due to size) |
+---
+
+## Analysis overview
+
+Our notebook analyses freight charges across shipping lanes in the Olist marketplace data. Order items are combined with order, customer, seller, product, category translation, as well as geolocation data to create a cached base view of ~110,000 delivered items.
+
+Our analysis then calculates:
+
+- **Shipping lane** based on seller state and customer state
+- **Freight charged per kilogram**, which is calculated as total freight divided by total weight for each lane and quarter
+- **Rank within quarter**, which compares each lane with other qualifying lanes in the same period
+- **Change over time**, which compares each lane with its previous observed quarter
+
+In order to avoid rankings being driven by groups containing only a small number of items, our final results are limited to lane-quarters with at least 30 items. This retains 348 of the 1,856 observed lane-quarter groups while still covering 92.3% of the order items.
 
 ---
+
+## Running the notebook
+
+You will first need to activate a virtual environment and start Jupyter by running the following:
+
+```bash
+source .venv/bin/activate
+jupyter notebook
+```
+
+Then open `assessment1.ipynb` and run the notebook from the top using a fresh kernel.
+
+Running the cells in order is important because some DataFrames are reassigned as the analysis progresses, and the benchmarking in Part B depends on the expected cache state.
+
+While Spark is running, its Web UI can usually be accessed at `http://localhost:4040`. If that port is already being used, Spark will move to the next available port. You will be able to see in the environment setup cell what the actual Web UI address is for the current session.
+
